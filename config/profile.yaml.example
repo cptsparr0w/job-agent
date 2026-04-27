@@ -1,0 +1,60 @@
+# Search profile. Edit for your search.
+
+candidate:
+  name: "Ninaad Mhaske"
+  resume_path: "./data/resume.pdf"
+  voice_guidelines_path: "./data/voice-guidelines.md"  # ninaad-voice extracted
+  context_brief_path: "./data/context-brief.md"        # career narrative for cover letters
+
+targets:
+  titles:
+    - "Senior Security Product Manager"
+    - "Principal Product Manager, Security"
+    - "Lead Product Manager, Trust"
+    - "Group Product Manager, Security"
+  exclude_titles:
+    - "Engineer"
+    - "Director"  # over-target for now
+    - "Consultant"
+  locations:
+    - "Remote (US)"
+    - "Seattle, WA"
+    - "Bellevue, WA"
+    - "Redmond, WA"
+  comp_floor_usd: 220000
+  no_go_companies:
+    # add competitors, companies you've already applied to recently, etc.
+    - "Palantir"
+
+scoring:
+  # Weights for the Qwen first-pass score (0-100 output)
+  weights:
+    title_match: 0.30
+    domain_match: 0.30  # security / trust / SaaS posture
+    seniority_match: 0.20
+    location_match: 0.10
+    comp_match: 0.10
+  # Threshold to advance from filter (3a) to Claude review (3b)
+  filter_cutoff: 65
+
+review:
+  # Claude-side review — how many to look at per run
+  max_per_run: 20
+  # Threshold to advance from review to tailor
+  review_cutoff: 75
+
+sources:
+  # Per-source crawl config
+  greenhouse:
+    enabled: true
+    boards:
+      # company slugs on greenhouse.io/embed/job_board
+      - anthropic
+      - openai
+      - stripe
+      - figma
+      - notion
+  lever:
+    enabled: false  # phase 3
+  workday:
+    enabled: false  # phase 3

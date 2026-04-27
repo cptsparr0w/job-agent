@@ -1,0 +1,44 @@
+[project]
+name = "job-agent"
+version = "0.1.0"
+description = "Draft-and-stage job application pipeline (local-only via LM Studio)"
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=1.50.0",          # used as OpenAI-compatible client for LM Studio
+    "playwright>=1.47.0",
+    "aiosqlite>=0.20.0",
+    "pydantic>=2.9.0",
+    "python-dotenv>=1.0.1",
+    "pyyaml>=6.0.2",
+    "click>=8.1.7",
+    "httpx>=0.27.0",
+    "structlog>=24.4.0",
+]
+
+[project.optional-dependencies]
+# Optional cloud fallback. Install with: pip install -e ".[claude]"
+# Only needed if you want to flip a tier to the Anthropic API.
+claude = ["anthropic>=0.39.0"]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.6.0",
+    "mypy>=1.11.0",
+]
+
+[project.scripts]
+job-agent = "job_agent.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

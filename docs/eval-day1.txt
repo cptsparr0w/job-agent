@@ -1,0 +1,3 @@
+parse|google/gemma-4-26b-a4b|1|13049.0|727.0
+score|google/gemma-4-26b-a4b|5|4967.0|207.0
+score|qwen/qwen3-coder-next|1|20769.0|62.0
